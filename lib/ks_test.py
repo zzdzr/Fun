@@ -1,6 +1,6 @@
 # make offset = 0
 import numpy as np
-from Replihic.lib.fountain_extension import *
+from lib.fountain_extension import *
 
 def ks_test(mat, half_width, mid, extension_length, coverage_ratio, resolution, offset):
 
@@ -31,7 +31,7 @@ def ks_test(mat, half_width, mid, extension_length, coverage_ratio, resolution, 
         return np.nan
 
 # make offset = 0
-def make_ks_test(clr, clr_control, regions, half_width, norm, coverage_ratio, offset, use_control=True):
+def make_ks_test(clr, regions, half_width, norm, coverage_ratio, offset, use_control=True):
     '''
     for each of candidate fountain, we use Kolmogorov–Smirnov test to verify its credibility
 
@@ -81,19 +81,10 @@ def make_ks_test(clr, clr_control, regions, half_width, norm, coverage_ratio, of
                 chrom_list.append(chrom)
                 mat = clr.matrix(balance = norm).fetch(chrom)
 
-                if use_control:
-                    mat_control = clr_control.matrix(balance = norm).fetch(chrom)
-                    ratio_mat = np.divide(mat, mat_control, out=np.zeros_like(mat), where=mat_control != 0)
-                    ratio_mat = np.nan_to_num(ratio_mat, nan=0)
-                    ks_res = ks_test(
-                        mat=ratio_mat, half_width=half_width, mid=mid, extension_length=extension_length,
-                        coverage_ratio=coverage_ratio, resolution=resolution, offset=offset
-                    )
-                else:
-                    ks_res = ks_test(
-                        mat=mat, half_width=half_width, mid=mid, extension_length=extension_length,
-                        coverage_ratio=coverage_ratio, resolution=resolution, offset=offset
-                    )
+                ks_res = ks_test(
+                    mat=mat, half_width=half_width, mid=mid, extension_length=extension_length,
+                    coverage_ratio=coverage_ratio, resolution=resolution, offset=offset
+                )
 
         ks_res_list.append(ks_res)
 

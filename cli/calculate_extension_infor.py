@@ -16,10 +16,6 @@ from cli import cli
     "cool_path", metavar='COOL_PATH',
     type=str, nargs=1
 )
-@click.argument(
-    "cool_control_path", metavar='COOL_CONTROL_PATH',
-    type=str, nargs=1
-)
 @click.option(
     "--half_width",
     help = "The number of bins that pad summit "
@@ -97,29 +93,17 @@ from cli import cli
     show_default=True,
     type = int
 )
-@click.option(
-    "--use_control",
-    help = "If use control",
-    default=False,
-    show_default=True,
-    type = bool
-)
 
 def find_fountains(
-    cool_path, cool_control_path, half_width, ext_length,
+    cool_path, half_width, ext_length,
     region_path, extension_pixels, offset,
     interval_length, coverage_ratio, output, norm=False,
     p_value = 0.05, signal_noise_background = 1.0,
-    max_merge_distance = 20000, use_control=False
+    max_merge_distance = 20000,
 ):
 
     # load cooler object
     clr = cooler.Cooler(cool_path)
-
-    if use_control:
-        clr_control = cooler.Cooler(cool_control_path)
-    else:
-        clr_control = None
 
     resolution = clr.binsize
     region = bioframe.read_table(
@@ -133,27 +117,24 @@ def find_fountains(
 
     # calculate maximum extension length
     df = plumb(
-        clr=clr, clr_control = clr_control,half_width = half_width, extension_length=ext_length,
+        clr, half_width = half_width, extension_length=ext_length,
         norm=norm, regions=region, bin_array=bin_array, offset=offset,
-        interval_length=interval_length, coverage_ratio = coverage_ratio, use_control=use_control
+        interval_length=interval_length, coverage_ratio = coverage_ratio
     )
 
     # calculate median strength of fountain and its SoN score
     df = calculate_fountain_SoN(
-        clr, clr_control, df,norm=norm,
+        clr, df, norm=norm,
         half_width = half_width,
         coverage_ratio=coverage_ratio,
-        offset = offset, use_control=use_control
+        offset = offset
     )
 
     df = make_ks_test(
-        clr, clr_control = clr_control, regions=df, half_width = half_width,
+        clr, regions=df, half_width = half_width,
         coverage_ratio=coverage_ratio, norm=norm,
-        offset = offset, use_control=use_control
+        offset = offset
     )
-
-    test = output + '_test.bed'
-    df.to_csv(test, header=True, index=None, sep='\t')
 
     ext_bool = filter_extension(df)
     pvalue_bool = df['p_value'] < p_value

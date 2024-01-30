@@ -154,8 +154,8 @@ def set_sampling_box(
     return tkg_plumb, up_bkg, down_bkg
 
 def calculate_fountain_SoN(
-    clr, clr_control, regions, half_width,
-    coverage_ratio, norm, offset, use_control=True
+    clr, regions, half_width,
+    coverage_ratio, norm, offset
 ):
 
     regions = regions.copy()
@@ -194,23 +194,11 @@ def calculate_fountain_SoN(
                 chrom_list.append(chrom)
                 mat = clr.matrix(balance = norm).fetch(chrom)
 
-                if use_control:
-                    mat_control = clr_control.matrix(balance = norm).fetch(chrom)
-                    ratio_mat = np.divide(mat, mat_control, out=np.zeros_like(mat), where=mat_control != 0)
-                    ratio_mat = np.nan_to_num(ratio_mat, nan=0)
-
-            if use_control:
-                tkg_plumb, up_bkg, down_bkg = set_sampling_box(
-                    mat = ratio_mat, half_width = half_width,
-                    extension_length = extension_length, offset = offset,
-                    init_bin = init_bin, resolution = resolution, coverage_ratio = coverage_ratio
-                )
-            else:
-                tkg_plumb, up_bkg, down_bkg = set_sampling_box(
-                    mat=mat, half_width=half_width,
-                    extension_length=extension_length, offset=offset,
-                    init_bin=init_bin, resolution=resolution, coverage_ratio=coverage_ratio
-                )
+            tkg_plumb, up_bkg, down_bkg = set_sampling_box(
+                mat=mat, half_width=half_width,
+                extension_length=extension_length, offset=offset,
+                init_bin=init_bin, resolution=resolution, coverage_ratio=coverage_ratio
+            )
 
         # calculate median interaction in fountain and its signal-over-noise
         # for central area and background areas
@@ -287,9 +275,9 @@ def calculate_fountain_SoN(
     return regions
 
 def plumb(
-    clr, clr_control, half_width, extension_length, norm,
+    clr, half_width, extension_length, norm,
     regions, bin_array, offset, coverage_ratio,
-    interval_length = 50000, threshold = 0.5, use_control=True
+    interval_length = 50000, threshold = 0.5
 ):
 
     regions = regions.copy()
@@ -311,25 +299,12 @@ def plumb(
             chrom_list.append(chrom)
             mat = clr.matrix(balance=norm).fetch(chrom)
 
-            if use_control:
-                mat_control = clr_control.matrix(balance=norm).fetch(chrom)
-                ratio_mat = np.divide(mat, mat_control, out=np.zeros_like(mat), where=mat_control != 0)
-                ratio_mat = np.nan_to_num(ratio_mat, nan=0)
-
-        if use_control:
-            max_ext, perc_list = center_background_plumb(
-                mat = ratio_mat, half_width=half_width,
-                extension_length=extension_length, init_bin=init_bin,
-                offset = offset, coverage_ratio = coverage_ratio, resolution=resolution,
-                bin_array = bin_array, interval_length=interval_length, threshold = threshold
-            )
-        else:
-            max_ext, perc_list = center_background_plumb(
-                mat = mat, half_width=half_width,
-                extension_length=extension_length, init_bin=init_bin,
-                offset = offset, coverage_ratio = coverage_ratio, resolution=resolution,
-                bin_array = bin_array, interval_length=interval_length, threshold = threshold
-            )
+        max_ext, perc_list = center_background_plumb(
+            mat = mat, half_width=half_width,
+            extension_length=extension_length, init_bin=init_bin,
+            offset = offset, coverage_ratio = coverage_ratio, resolution=resolution,
+            bin_array = bin_array, interval_length=interval_length, threshold = threshold
+        )
 
         try:
             perc_list = list(perc_list)
