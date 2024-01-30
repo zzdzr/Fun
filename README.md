@@ -12,10 +12,11 @@
 - Three major steps are included in the “Fun” pipeline, including **summit identification**, **elongation evaluation** and **end determination**, and further validation with quality control.
 
 # Requirements
-  '''
+  Please ensure that you have already installed the following packages:
+  ```
   python3.8 packages: numpy, pandas, click, numbda, cooler, bioframe  
   USCS bedGraphToBigWig
-  '''
+  ```
 
 # Usage
 ## Data processing for Repli-HiC
