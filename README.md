@@ -12,7 +12,7 @@
 - Three major steps are included in the “Fun” pipeline, including **summit identification**, **elongation evaluation** and **end determination**, and further validation with quality control.
 
 # Requirements
-  `python3.8 packages: click, numbda, cooler, bioframe...`
+  `python3.8 packages: click, numbda, cooler, bioframe...`  
   `USCS bedGraphToBigWig`
 
 # Usage
