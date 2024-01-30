@@ -14,8 +14,9 @@
 # Requirements
   Please ensure that you have already installed the following packages:
   ```
-  python3.8 packages: numpy, pandas, click, numbda, cooler, bioframe  
-  USCS bedGraphToBigWig
+  Python packages: numpy, pandas, click, numbda, cooler, bioframe...
+    
+  bedGraphToBigWig (from UCSC)
   ```
 
 # Usage
