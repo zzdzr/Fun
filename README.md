@@ -37,7 +37,7 @@ Generally, there are three major steps in identification of replication fountain
 - **Calculate the signal-over-noise (SoN)**.
 This calculation module is separated and can be used to calculate the SoN at a given resolution independently. In the present version, you have the ability to define the **search extent** for the sampling box, specify the **width of the sampling box**, and constrain the **offset magnitude**. For example, if you want to calculate SoN at 10kb resolution, with search extent at 500kb, padding width at 20kb and offset at 50kb, You can use the following example code.
    ```
-   Replihic calculate-son-score input.mcool::resolutions/10000 --out_dir /output_dir/ --coverage_ratio 0 --chromsize_path ChromInfo.txt  
+   Replihic calculate-son-score input.mcool::resolutions/10000 --out_dir /output_dir/ --coverage_ratio 0 --chromsize_path ChromInfo.txt --bedGraphToBigWig bedGraphToBigWig  
    --ext_length 500000 --padding_width 2 --offset 50000 --merge True --use_mean True
    ```
 
