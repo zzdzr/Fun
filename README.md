@@ -11,6 +11,8 @@
 - A high-quality fountain possesses two features: a remarkable **signal-over-noise (SoN)** ratio between the fountain center and its flanking regions and continuous interactions extending along the vertical direction against the diagonal.
 - Three major steps are included in the “Fun” pipeline, including **summit identification**, **elongation evaluation** and **end determination**, and further validation with quality control.
 
+# Requirements
+  `python3.8` `numbda`
 
 # Usage
 ## Data processing for Repli-HiC
