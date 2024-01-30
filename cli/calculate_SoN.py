@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 @click.option(
     "--coverage_ratio",
     help = "Given the targeted init bin for plumb,"
-    "if the coverage of bins your collect is lower than"
+    "if the coverage of bins your collect is lower than "
     "this threshold, we consider it as NaNs."
     "For sparse matrix, you should consider this argument carefully",
     default = 0.2,
@@ -81,6 +81,11 @@ logger = logging.getLogger(__name__)
     help = "file containing chromsize",
     type = str
 )
+@click.option(
+    "--bedGraphToBigWig",
+    help = "path to your bedGraphToBigWig from UCSC",
+    type = str
+)
 
 def calculate_SoN_score(
     cool_path, out_dir, chromsize_path, norm = False, coverage_ratio = 0.2,
@@ -101,8 +106,6 @@ def calculate_SoN_score(
         merge (bool): Whether to merge the generated bedgraph files.
         use_mean (bool): Use mean for SoN score calculation.
 
-    Returns:
-        None
     """
     logger.info('Starting SoN calculation...')
 
@@ -184,7 +187,7 @@ def calculate_SoN_score(
         )
 
         bedgraph_to_bigwig(
-            merged_file_path, chromsize_path, bigwig_output_path
+            bedGraphToBigWig, merged_file_path, chromsize_path, bigwig_output_path
         )
 
     logger.info('SoN score calculation completed.')

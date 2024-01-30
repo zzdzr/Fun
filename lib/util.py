@@ -27,10 +27,11 @@ def align_track_with_chromsize(track, chromsizes):
     return track
 
 
-def bedgraph_to_bigwig(track_path, chromsizes_path, bigwig_output_path):
+def bedgraph_to_bigwig(bedGraphToBigWig, track_path, chromsizes_path, bigwig_output_path):
     """
 
     Args:
+        bedGraphToBigWig (str): Path to bedGraphToBigWig from UCSC
         bedgraph_path (str): Path to the input bedGraph file.
         chromsize_path (str): Path to the chromosome size file.
         bigwig_output_path (str): Path to save the output BigWig file.
@@ -38,5 +39,5 @@ def bedgraph_to_bigwig(track_path, chromsizes_path, bigwig_output_path):
     Returns:
         None
     """
-    cmd = ['/home2/zdzr/tools/tools/bedGraphToBigWig', track_path, chromsizes_path, bigwig_output_path]
+    cmd = [bedGraphToBigWig, track_path, chromsizes_path, bigwig_output_path]
     subprocess.run(cmd)
