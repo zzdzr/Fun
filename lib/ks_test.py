@@ -1,4 +1,3 @@
-# make offset = 0
 import numpy as np
 from lib.fountain_extension import *
 
@@ -66,12 +65,7 @@ def make_ks_test(clr, regions, half_width, norm, coverage_ratio, offset, use_con
 
         else:
             if chrom in chrom_list:
-                if use_control:
-                    ks_res = ks_test(
-                        mat=ratio_mat, half_width=half_width, mid=mid, extension_length=extension_length,
-                        coverage_ratio=coverage_ratio, resolution=resolution, offset=offset
-                    )
-                else:
+
                     ks_res = ks_test(
                         mat=mat, half_width=half_width, mid=mid, extension_length=extension_length,
                         coverage_ratio=coverage_ratio, resolution=resolution, offset=offset
