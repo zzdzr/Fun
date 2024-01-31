@@ -7,11 +7,12 @@
 ![image](https://github.com/zzdzr/Fun/blob/master/image/Fun.png)
 
 # Contents
-- [Dependencies](#dependencies)
+- [Requirements](#requirements)
 - [Description](#description)
 - [Usage](#usage)
 - [Version](#version)
-
+- [Output](#output)
+  
 # Description
 - A high-quality fountain possesses two features: a remarkable **signal-over-noise (SoN)** ratio between the fountain center and its flanking regions and continuous interactions extending along the vertical direction against the diagonal.
 - Three major steps are included in the “Fun” pipeline, including **summit identification**, **elongation evaluation** and **end determination**, and further validation with quality control.
