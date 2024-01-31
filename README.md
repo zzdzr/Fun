@@ -41,7 +41,7 @@ The sequencing library of Repli-HiC requires some preliminary data processing:
 ## Fountain identification
 Generally, there are three major steps in identification of replication fountains. The current version requires step-by-step execution (a more comprehensive version will be updated subsequently, please give me a moment to refine ^_^).
 - **Calculate the signal-over-noise (SoN)**.
-This calculation module is separated and can be used to calculate the SoN at a given resolution independently. In the present version, you have the ability to define the **search extent** for the sampling box, specify the **width of the sampling box**, and constrain the **offset magnitude**. For example, if you want to calculate SoN at 10kb resolution, with search extent at 500kb, padding width at 20kb and offset at 50kb, You can use the following example code.
+This calculation module is separated and can be used to calculate the SoN at a given resolution independently. In the present version, you have the ability to define the **search extent** for the sampling box, specify the **width of the sampling box**, and constrain the **offset**. For example, if you want to calculate SoN at 10kb resolution, with search extent at 500kb, padding width at 20kb and offset at 50kb, You can use the following example code.
    ```
    Fun calculate-son-score input.mcool::resolutions/10000 --out_dir /output_dir/ --coverage_ratio 0 --chromsize_path ChromInfo.txt --bedGraphToBigWig bedGraphToBigWig  
    --ext_length 500000 --padding_width 2 --offset 50000 --merge True --use_mean True
@@ -54,7 +54,7 @@ In current version, we attempt to find summits based on an algorithm from coolto
    ```
 
 - **Identify fountains**.
-Before finally identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can set the search step for the sampling box based on the summits that have been identified, within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and the **fold change** (--signal_noise_background).
+Before identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can perform algorithm within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the sliding layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and **fold change** (--signal_noise_background).
    ```
    Fun find-fountains input.mcool::resolutions/10000 --ext_length 500000 --half_width 2 --norm VC_SQRT --region_path Summits_10000_merged.bed
    --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/result_10kb
@@ -69,22 +69,49 @@ Before finally identifying the fountains, please remove the summits that fall in
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|1.1e-08|  
 
-#### Parameter Explanation:
-<pre>
-<ul style="line-height: 0.8 !important; margin: 0; padding: 0;;">
-  <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
-  <li><b>score</b>: Signal-over-noise(SoN) score for summits.</li>
-  <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
-  <li><b>max_extension</b>：The extension length of identified fountains.</li>
-  <li><b>signal_noise_upstream</b>: The ratio of the signal in the central signal region to the signal in the upstream background sampling region.</li>
-  <li><b>signal_noise_downstream</b>: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.</li>
-  <li><b>signal_noise_average_background</b>: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.</li>
-  <li><b>p_values</b>: The p-value obtained from the Kolmogorov-Smirnov (K-S) test performed using the signal from the central region and the average signal from the background region.</li>
-</ul>
-</pre>
+#### Column Explanation:
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .pre-like {
+      font-family: monospace;
+      white-space: pre-wrap; /* CSS 2.0 */
+      white-space: -moz-pre-wrap; /* For Mozilla */
+      white-space: -pre-wrap; /* For Opera 4-6 */
+      white-space: -o-pre-wrap; /* For Opera 7 */
+      word-wrap: break-word; /* Internet Explorer 5.5+ */
+    }
+    ul.tight-list {
+      line-height: 0.8;
+      margin: 0;
+      padding: 0;
+      list-style-type: none; /* Optional: removes bullet points */
+    }
+    ul.tight-list li {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="pre-like">
+    <ul class="tight-list">
+      <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
+      <li><b>score</b>: Signal-over-noise (SoN) score for summits.</li>
+      <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
+      <li><b>max_extension</b>: The extension length of identified fountains.</li>
+      <li><b>signal_noise_upstream</b>: The ratio of the signal in the central signal region to the signal in the upstream background sampling region.</li>
+      <li><b>signal_noise_downstream</b>: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.</li>
+      <li><b>signal_noise_average_background</b>: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.</li>
+      <li><b>p_values</b>: The p-value obtained from the Kolmogorov-Smirnov (K-S) test performed using the signal from the central region and the average signal from the background region.</li>
+    </ul>
+  </div>
+</body>
+</html>
 
 
-
+   
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
 
 
