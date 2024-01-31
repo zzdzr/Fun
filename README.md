@@ -32,7 +32,7 @@ The sequencing library of Repli-HiC requires some preliminary data processing:
 
 - Then, the **trimLinker** tool should be used to eliminate potential linker sequences within the paired reads.
   `trimLinker -m 1 -k 2 -l 16 -o output -n name -A ACGCGATATCTTATC -B AGTCAGATAAGATAT trimmed_R1.fq input_R2.fq.gz`
-  > trimLinker can be obtained from ChIA-PET2.
+  > trimLinker can be obtained from ChIA-PET2(https://github.com/GuipengLi/ChIA-PET2).
 
 - Afterwards, the processed sequencing library can be integrated with 4DN Hi-C pipelines for further analysis.
   > The 4DN Hi-C data processing pipeline includes alignment, filtering, and matrix aggregation and normalization steps. https://data.4dnucleome.org/resources/data-analysis/hi_c-processing-pipeline
