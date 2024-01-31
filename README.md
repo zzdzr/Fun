@@ -1,9 +1,8 @@
 
-# Fun
+# Fun   ![image](https://zenodo.org/badge/641802007.svg)  
+
 **"Fun"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.  
 
-
-  
 ![image](https://github.com/zzdzr/Fun/blob/master/image/Fun.png)
 
 # Contents
