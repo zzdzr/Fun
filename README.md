@@ -63,15 +63,20 @@ important result files:
   - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
     
-|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions|
+|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions| p_values |
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
 
   ```
-  chrom, start, end: genomic coordinates of summits.  
+  chrom, start, end: Genomic coordinates of summits.  
   score: Signal-over-noise(SoN) score for summits.  
-  perc_res_list: list containing   
+  perc_res_list: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).  
+  max_extension：The extension length of identified fountains.  
+  signal_noise_upstream: The ratio of the signal in the central signal region to the signal in the upstream background sampling region.  
+  signal_noise_downstream: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.  
+  signal_noise_average_background: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.
+  p_values: 
  ```
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
