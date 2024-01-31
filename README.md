@@ -64,13 +64,13 @@ Before finally identifying the fountains, please remove the summits that fall in
 
 
     
-|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions| 
-|----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
+|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions| p_values |
+|----|-----|-----|----|------|-----|------|------|------|------|----|---|----|----|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
 #### Parameter Explanation:
 <pre>
-<ul style="line-height: 0.4;">
+<ul style="line-height: 1.2;">
   <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
   <li><b>score</b>: Signal-over-noise(SoN) score for summits.</li>
   <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
