@@ -69,6 +69,11 @@ important result files:
 
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
+
+
+| chr1 | x1 | x2 | chr2 | y1 | y2 |
+|----|----|----|----|----|----|
+|chr1|4675000|4685000|chr1|4975000|4985000|
    
 # Version
   - Fun v1.0
