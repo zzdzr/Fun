@@ -68,7 +68,7 @@ important result files:
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
-    - Here is the explanation of the above parameters
+  Here is the explanation of the above parameters
 <pre>
   - <b>chrom, start, end</b>: Genomic coordinates of summits.  
   - <b>score</b>: Signal-over-noise(SoN) score for summits.  
