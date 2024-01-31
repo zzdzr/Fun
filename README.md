@@ -56,7 +56,13 @@ In current version, we attempt to find summits based on an algorithm from coolto
 Before finally identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can set the search step for the sampling box based on the summits that have been identified, within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and the **fold change** (--signal_noise_background).
    ```
    Fun find-fountains input.mcool::resolutions/10000 --ext_length 500000 --half_width 2 --norm VC_SQRT --region_path Summits_10000_merged.bed
-   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.1 1.2 1.3 1.4 1.5 --output /output_dir/result_10kb
+   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/result_10kb
    ```
+# Output
+important result files:
+  - ***_1.3.tab**: This file contains identified fountains after quality control
+
+  - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
+   
 # Version
   - Fun v1.0
