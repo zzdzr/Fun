@@ -1,7 +1,10 @@
 
 # FUN
-**"FUN"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.
- ![image](https://github.com/zzdzr/Fun/blob/master/image/Fun.png)
+**"FUN"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.  
+
+
+  
+![image](https://github.com/zzdzr/Fun/blob/master/image/Fun.png)
 
 # Contents
 - [Dependencies](#dependencies)
