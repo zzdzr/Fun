@@ -61,6 +61,8 @@ Before identifying the fountains, please remove the summits that fall into low-q
    ```
 # Output
 ### Result Files:
+<br>
+
   - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
 
@@ -69,49 +71,22 @@ Before identifying the fountains, please remove the summits that fall into low-q
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|1.1e-08|  
 
+<br>
+
 #### Column Explanation:
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    .pre-like {
-      font-family: monospace;
-      white-space: pre-wrap; /* CSS 2.0 */
-      white-space: -moz-pre-wrap; /* For Mozilla */
-      white-space: -pre-wrap; /* For Opera 4-6 */
-      white-space: -o-pre-wrap; /* For Opera 7 */
-      word-wrap: break-word; /* Internet Explorer 5.5+ */
-    }
-    ul.tight-list {
-      line-height: 0.8;
-      margin: 0;
-      padding: 0;
-      list-style-type: none; /* Optional: removes bullet points */
-    }
-    ul.tight-list li {
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="pre-like">
-    <ul class="tight-list">
-      <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
-      <li><b>score</b>: Signal-over-noise (SoN) score for summits.</li>
-      <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
-      <li><b>max_extension</b>: The extension length of identified fountains.</li>
-      <li><b>signal_noise_upstream</b>: The ratio of the signal in the central signal region to the signal in the upstream background sampling region.</li>
-      <li><b>signal_noise_downstream</b>: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.</li>
-      <li><b>signal_noise_average_background</b>: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.</li>
-      <li><b>p_values</b>: The p-value obtained from the Kolmogorov-Smirnov (K-S) test performed using the signal from the central region and the average signal from the background region.</li>
-    </ul>
-  </div>
-</body>
-</html>
+| Parameter | Description |
+| --- | --- |
+| **chrom, start, end** | Genomic coordinates of summits. |
+| **score** | Signal-over-noise (SoN) score for summits. |
+| **perc_res_list** | List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset). |
+| **max_extension** | The extension length of identified fountains. |
+| **signal_noise_upstream** | The ratio of the signal in the central signal region to the signal in the upstream background sampling region. |
+| **signal_noise_downstream** | The ratio of the signal in the central signal region to the signal in the downstream background sampling region. |
+| **signal_noise_average_background** | The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions. |
+| **p_values** | The p-value obtained from the Kolmogorov-Smirnov (K-S) test performed using the signal from the central region and the average signal from the background region. |
 
+<br>
 
-   
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
 
 
@@ -120,7 +95,7 @@ Before identifying the fountains, please remove the summits that fall into low-q
 |chr1|4675000|4685000|chr1|4975000|4985000|
 
 
-
+<br>
   
 ### Visualization:
 - The current version does not yet offer visualization method, but you can generate the following display through matplotlib.  
