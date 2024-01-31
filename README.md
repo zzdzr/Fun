@@ -59,4 +59,4 @@ Before finally identifying the fountains, please remove the summits that fall in
    --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.1 1.2 1.3 1.4 1.5 --output /output_dir/result_10kb
    ```
 # Version
-  Fun v1.0
+  - Fun v1.0
