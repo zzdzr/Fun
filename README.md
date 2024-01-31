@@ -70,8 +70,8 @@ important result files:
 
   ```
   chrom, start, end: genomic coordinates of summits.
-  score:
-  perc_res_list:
+  score: Signal-over-noise(SoN) score for summits.
+  perc_res_list: list containing 
  ```
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
