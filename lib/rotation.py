@@ -6,11 +6,7 @@ import math
 
 
 def _transform(theta):
-    '''
 
-    :param theta:
-    :return:
-    '''
     import numpy as np
     return theta * np.pi / 180
 
@@ -27,7 +23,6 @@ def rotate(
     '''
     :param theta: theta > 0, counter-clockwise, else clockwise
     '''
-    #mat = mat.copy()
 
     # judge the orientation of rotation
     if theta >= 0:
@@ -47,7 +42,6 @@ def rotate(
         tmp_cord[1] = tmp_cord[1] + center[1]
         cord_list.append(tmp_cord)
 
-   # print(cord_list)
     # Extract the values
     value_list = []
     for i in cord_list:

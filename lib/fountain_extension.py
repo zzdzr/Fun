@@ -175,8 +175,7 @@ def calculate_fountain_SoN(
     upstream_signal_noise_ratio_list = []
     downstream_signal_noise_ratio_list = []
     ave_bkg_signal_noise_ratio_list = []
-    median_interactions = []
-    sum_interactions = []
+
     for index, row in regions.iterrows():
 
         chrom = row['chrom'][3:]
@@ -258,19 +257,11 @@ def calculate_fountain_SoN(
             signal_background_ratio
         )
 
-        median_interactions.append(
-            tkg_plumb_median
-        )
-
-        sum_interactions.append(
-            tkg_plumb_sum
-        )
 
     regions['signal_noise_upstream'] = upstream_signal_noise_ratio_list
     regions['signal_noise_downstream'] = downstream_signal_noise_ratio_list
     regions['signal_noise_average_background'] = ave_bkg_signal_noise_ratio_list
-    regions['median_strength'] = median_interactions
-    regions['sum_interactions'] = sum_interactions
+
 
     return regions
 
@@ -341,7 +332,7 @@ def background_evaluation(
     Mention: your dataframe has been sorted by chromosome names.
     """
     feature = feature.copy()
-    columns = ['chrom', 'start', 'end', 'name', 'score', 'strand']
+    columns = ['chrom', 'start', 'end', 'name', 'SoN', 'strand']
 
     if not feature.columns.isin(columns).any():
         feature.columns = columns
@@ -385,8 +376,6 @@ def background_evaluation(
             )]
         )
 
-       # target_plumb_sum = np.nansum(target_plumb_val)
-
         positive_value = target_plumb_val[target_plumb_val>0]
         positive_value_ratio = len(positive_value) / len(target_plumb_val)
 
@@ -401,7 +390,6 @@ def background_evaluation(
 
         pos_ratio_list.append(positive_value_ratio)
         neg_ratio_list.append(negative_value_ratio)
-        #val_list.append(target_plumb_sum)
 
     feature.loc[:, 'pos_ratio'] = pos_ratio_list
     feature.loc[:, 'neg_ratio'] = neg_ratio_list

@@ -90,7 +90,6 @@ def plumb_sum(mat, half_width, init_bin, extension_length, resolution, offset):
         resolution=resolution
     ):
 
-        #val = nb_sum(mat[row_idx, col_idx])
         if row_idx.size == 0 or col_idx.size == 0:
             val = np.nan
         else:
@@ -181,7 +180,6 @@ def plumb_mean(mat, half_width, init_bin, extension_length, resolution, offset):
         resolution=resolution
     ):
 
-        #val = nb_sum(mat[row_idx, col_idx])
         if row_idx.size == 0 or col_idx.size == 0:
             val = np.nan
         else:

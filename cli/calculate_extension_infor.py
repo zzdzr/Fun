@@ -145,7 +145,7 @@ def find_fountains(
 
         df_tmp = df[(ext_bool & pvalue_bool & signal_bool)]
         df_tmp = merge_fountains(df_tmp.reset_index(drop=True), max_distance=max_merge_distance)
-        output_tmp1 = output + '_{}.bed'.format(val)
+        output_tmp1 = output + '_{}.tab'.format(val)
         df_tmp.to_csv(output_tmp1, header=True, index=None, sep='\t')
 
         output_tmp2 = output + '_{}.bedpe'.format(val)

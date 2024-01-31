@@ -44,7 +44,7 @@ def generate_summits(cool_path, track, out_dir):
         signal_filter = track[track['chrom'] == chrom]
         signal_filter_value = signal_filter['values'].values
 
-        # When find summits, we ignore the negative SoN values
+        # To find summits, we ignore the negative SoN values
         signal_filter_value[signal_filter_value < 0] = 0
         signal_filter['values'] = signal_filter_value
 
@@ -64,7 +64,7 @@ def generate_summits(cool_path, track, out_dir):
             'start': chr_cord_start,
             'end': chr_cord_end,
             'name': names,
-            'score': SoN_values,
+            'SoN': SoN_values,
             'strand': strands
         }
 
