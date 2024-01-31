@@ -70,7 +70,7 @@ Before finally identifying the fountains, please remove the summits that fall in
 
 #### Parameter Explanation:
 <pre>
-<ul style="line-height: 1.0; margin: 0; padding: 0;;">
+<ul style="line-height: 0.8 !important; margin: 0; padding: 0;;">
   <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
   <li><b>score</b>: Signal-over-noise(SoN) score for summits.</li>
   <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
