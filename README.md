@@ -62,8 +62,9 @@ Before finally identifying the fountains, please remove the summits that fall in
 important result files:
   - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
+
     
-|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions| p_values |
+|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions| p_values |  
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
