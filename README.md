@@ -91,8 +91,12 @@ Before finally identifying the fountains, please remove the summits that fall in
 |chr1|4675000|4685000|chr1|4975000|4985000|
 
 
+
   
-#### Visualization:
+### Visualization:
+The current version does not yet offer visualization features, but you can generate the following display through matplotlib.  
+
+
 ![image](https://github.com/zzdzr/Fun/blob/master/image/Fountains.png)
   
 # Version
