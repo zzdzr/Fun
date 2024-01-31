@@ -61,7 +61,6 @@ Before identifying the fountains, please remove the summits that fall into low-q
    ```
 # Output
 ### Result Files:
-<br>
 
   - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
@@ -70,8 +69,6 @@ Before identifying the fountains, please remove the summits that fall into low-q
 |chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background| p_values |
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|1.1e-08|  
-
-<br>
 
 #### Column Explanation:
 | Parameter | Description |
@@ -93,7 +90,6 @@ Before identifying the fountains, please remove the summits that fall into low-q
 | chr1 | x1 | x2 | chr2 | y1 | y2 |
 |----|----|----|----|----|----|
 |chr1|4675000|4685000|chr1|4975000|4985000|
-
 
 <br>
   
