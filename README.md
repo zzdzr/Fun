@@ -1,6 +1,6 @@
 
-# FUN
-**"FUN"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.  
+# Fun
+**"Fun"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.  
 
 
   
@@ -10,6 +10,7 @@
 - [Dependencies](#dependencies)
 - [Description](#description)
 - [Usage](#usage)
+- [Version](#version)
 
 # Description
 - A high-quality fountain possesses two features: a remarkable **signal-over-noise (SoN)** ratio between the fountain center and its flanking regions and continuous interactions extending along the vertical direction against the diagonal.
@@ -58,4 +59,4 @@ Before finally identifying the fountains, please remove the summits that fall in
    --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.1 1.2 1.3 1.4 1.5 --output /output_dir/result_10kb
    ```
 # Version
-  FUN v1.0
+  Fun v1.0
