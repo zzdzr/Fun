@@ -60,7 +60,7 @@ Before finally identifying the fountains, please remove the summits that fall in
    ```
 # Output
 important result files:
-  - ***_1.3.tab**: This file contains identified fountains after quality control
+  - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
    
