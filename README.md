@@ -65,7 +65,7 @@ important result files:
     
 |chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions|
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
-|chr1|9118 |10409|.|89064 |.|peak_1|peak_3|3330  |3814  |39  |4.5|0.03|
+|chr1|4820000 |4830000|.|1.99 |.|nan, nan, nan, nan, nan, nan, nan, nan, nan, 0.9, 0.9333333333333333, 0.95, 0.84, 0.8333333333333334, 0.8, 0.725, 0.7111111111111111, 0.68, 0.6181818181818182, 0.6, 0.5538461538461539, 0.5428571428571428, 0.5466666666666666, 0.5125, 0.4823529411764706, 0.45555555555555555, 0.45555555555555555|150|4.60  |4.07  |4.32  |5.58|112.9|1.1e-08|
 
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
