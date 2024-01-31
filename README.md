@@ -94,7 +94,7 @@ Before finally identifying the fountains, please remove the summits that fall in
 
   
 ### Visualization:
-The current version does not yet offer visualization features, but you can generate the following display through matplotlib.  
+- The current version does not yet offer visualization features, but you can generate the following display through matplotlib.  
 
 
 ![image](https://github.com/zzdzr/Fun/blob/master/image/Fountains.png)
