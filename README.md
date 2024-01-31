@@ -10,8 +10,8 @@
 - [Requirements](#requirements)
 - [Description](#description)
 - [Usage](#usage)
-- [Version](#version)
 - [Output](#output)
+- [Version](#version)
   
 # Description
 - A high-quality fountain possesses two features: a remarkable **signal-over-noise (SoN)** ratio between the fountain center and its flanking regions and continuous interactions extending along the vertical direction against the diagonal.
