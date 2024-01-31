@@ -69,7 +69,6 @@ important result files:
 |chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
 <pre>
-```
   <b>chrom, start, end</b>: Genomic coordinates of summits.  
   <b>score</b>: Signal-over-noise(SoN) score for summits.  
   <b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).  
@@ -78,7 +77,6 @@ important result files:
   <b>signal_noise_downstream</b>: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.  
   <b>signal_noise_average_background</b>: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.
   <b>p_values</b>: 
-```
 </pre>
 
 
