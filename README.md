@@ -90,8 +90,10 @@ Before finally identifying the fountains, please remove the summits that fall in
 |----|----|----|----|----|----|
 |chr1|4675000|4685000|chr1|4975000|4985000|
 
+
   
-#### Parameter Explanation:
+#### Visualization:
+![image](https://github.com/zzdzr/Fun/blob/master/image/Fountains.png)
   
 # Version
   - Fun v1.0
