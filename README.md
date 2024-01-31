@@ -65,13 +65,14 @@ important result files:
     
 |chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions|
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
-|chr1|4820000 |4830000|.|1.99 |.|nan, nan, ... , 0.48, 0.45, 0.45|150|4.60  |4.07  |4.32  |5.58|112.9|1.1e-08|  
+|chr1|4820000 |4830000|.|1.99 |.|nan, nan, ... , 0.48, 0.45, 0.45|150|4.60|4.07|4.32|5.58|112.9|1.1e-08|  
 
-```
-**chrom, start, end**: genomic coordinates of summits.
-**score**:
-**perc_res_list** 
-```
+
+
+- **chrom, start, end**: genomic coordinates of summits.
+- **score**:
+- **perc_res_list**
+
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
 
