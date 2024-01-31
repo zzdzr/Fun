@@ -1,12 +1,18 @@
 
-# FUN
-**"FUN"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.
+# Fun
+**"Fun"** is the algorithm to identify **replication fountains**. The current version is still preliminary and needs further refinement.  
+
+
+  
+![image](https://github.com/zzdzr/Fun/blob/master/image/Fun.png)
 
 # Contents
-- [Dependencies](#dependencies)
 - [Description](#description)
+- [Requirements](#requirements)
 - [Usage](#usage)
-
+- [Output](#output)
+- [Version](#version)
+  
 # Description
 - A high-quality fountain possesses two features: a remarkable **signal-over-noise (SoN)** ratio between the fountain center and its flanking regions and continuous interactions extending along the vertical direction against the diagonal.
 - Three major steps are included in the “Fun” pipeline, including **summit identification**, **elongation evaluation** and **end determination**, and further validation with quality control.
@@ -14,7 +20,7 @@
 # Requirements
   Please ensure that you have already installed the following packages:
   ```
-  Python packages: numpy, pandas, scipy, click, numba, cooler, bioframe...
+  Python(3.8+) packages: numpy, pandas, scipy, click, numba, cooler, bioframe...
     
   bedGraphToBigWig (from UCSC)
   ```
@@ -27,7 +33,7 @@ The sequencing library of Repli-HiC requires some preliminary data processing:
 
 - Then, the **trimLinker** tool should be used to eliminate potential linker sequences within the paired reads.
   `trimLinker -m 1 -k 2 -l 16 -o output -n name -A ACGCGATATCTTATC -B AGTCAGATAAGATAT trimmed_R1.fq input_R2.fq.gz`
-  > trimLinker can be obtained from ChIA-PET2.
+  > trimLinker can be obtained from ChIA-PET2(https://github.com/GuipengLi/ChIA-PET2).
 
 - Afterwards, the processed sequencing library can be integrated with 4DN Hi-C pipelines for further analysis.
   > The 4DN Hi-C data processing pipeline includes alignment, filtering, and matrix aggregation and normalization steps. https://data.4dnucleome.org/resources/data-analysis/hi_c-processing-pipeline
@@ -51,7 +57,49 @@ In current version, we attempt to find summits based on an algorithm from coolto
 Before finally identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can set the search step for the sampling box based on the summits that have been identified, within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and the **fold change** (--signal_noise_background).
    ```
    Fun find-fountains input.mcool::resolutions/10000 --ext_length 500000 --half_width 2 --norm VC_SQRT --region_path Summits_10000_merged.bed
-   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.1 1.2 1.3 1.4 1.5 --output /output_dir/result_10kb
+   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/result_10kb
    ```
+# Output
+### Result Files:
+  - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
+
+
+    
+|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background| p_values |
+|----|-----|-----|----|------|-----|------|------|------|------|----|---|
+|chr1|4820000 |4830000|.|1.99 |.|nan, ... , 0.45, 0.45|150|4.60|4.07|4.32|1.1e-08|  
+
+#### Parameter Explanation:
+<pre>
+<ul style="line-height: 0.8 !important; margin: 0; padding: 0;;">
+  <li><b>chrom, start, end</b>: Genomic coordinates of summits.</li>
+  <li><b>score</b>: Signal-over-noise(SoN) score for summits.</li>
+  <li><b>perc_res_list</b>: List containing the proportion of pixels where the central signal region is dominant over the background region at a given distance (The 'nan' values are due to the offset).</li>
+  <li><b>max_extension</b>：The extension length of identified fountains.</li>
+  <li><b>signal_noise_upstream</b>: The ratio of the signal in the central signal region to the signal in the upstream background sampling region.</li>
+  <li><b>signal_noise_downstream</b>: The ratio of the signal in the central signal region to the signal in the downstream background sampling region.</li>
+  <li><b>signal_noise_average_background</b>: The ratio of the signal in the central signal region to the average signal in the upstream and downstream background regions.</li>
+  <li><b>p_values</b>: The p-value obtained from the Kolmogorov-Smirnov (K-S) test performed using the signal from the central region and the average signal from the background region.</li>
+</ul>
+</pre>
+
+
+
+  - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
+
+
+| chr1 | x1 | x2 | chr2 | y1 | y2 |
+|----|----|----|----|----|----|
+|chr1|4675000|4685000|chr1|4975000|4985000|
+
+
+
+  
+### Visualization:
+- The current version does not yet offer visualization method, but you can generate the following display through matplotlib.  
+
+
+![image](https://github.com/zzdzr/Fun/blob/master/image/Fountains.png)
+  
 # Version
-  FUN v1.0
+  - Fun v1.0
