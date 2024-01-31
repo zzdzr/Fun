@@ -61,9 +61,9 @@ Before finally identifying the fountains, please remove the summits that fall in
 # Output
 important result files:
   - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:  
-|chrom |start|end  |name |score |strand  |perc_res_list |max_extension |signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength | sum_interactions|
+|chrom|start|end|name|score|strand|perc_res_list|max_extension|signal_noise_upstream|signal_noise_downstream|signal_noise_average_background|median_strength|sum_interactions|
 |----|-----|-----|----|------|-----|------|------|------|------|----|---|----|
-|chr1|9118 |10409|chr1|89064 |90360|peak_1|peak_3|3330  |3814  |39  |4.5|0.03|
+
 
   - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
    
