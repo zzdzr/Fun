@@ -42,21 +42,21 @@ Generally, there are three major steps in identification of replication fountain
 - **Calculate the signal-over-noise (SoN)**.
 This calculation module is separated and can be used to calculate the SoN at a given resolution independently. In the present version, you have the ability to define the **search extent** for the sampling box, specify the **width of the sampling box**, and constrain the **offset**. For example, if you want to calculate SoN at 10kb resolution, with search extent at 500kb, padding width at 20kb and offset at 50kb, You can use the following example code.
    ```
-   Fun calculate-son-score input.mcool::resolutions/10000 --out_dir /output_dir/ --coverage_ratio 0 --chromsize_path ChromInfo.txt --bedGraphToBigWig bedGraphToBigWig  
-   --ext_length 500000 --padding_width 2 --offset 50000 --merge True --use_mean True
+   Fun calculate-son-score input.mcool::resolutions/10000 --out_dir /output_dir --coverage_ratio 0 --chromsize_path ChromInfo.txt 
+   --ext_length 500000 --padding_width 2 --offset 50000 --integrate True --use_mean True
    ```
 
 - **Identify potential summits of fountains**.
 In current version, we attempt to find summits based on an algorithm from cooltools. This calculation module is based on the results of the previous SoN calculation. Therefore, before executing this module, please ensure that the SoN track can be correctly outputted.
    ```
-  Fun generate-summits input.mcool::resolutions/10000 --track SoN_10000_merged.bedgraph --out_dir /output_dir/
+  Fun generate-summits input.mcool::resolutions/10000 --track SoN_10000_merged.bedgraph --out_dir /output_dir
    ```
 
 - **Identify fountains**.
 Before identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can perform algorithm within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the sliding layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and **fold change** (--signal_noise_background).
    ```
    Fun find-fountains input.mcool::resolutions/10000 --ext_length 500000 --half_width 2 --norm VC_SQRT --region_path Summits_10000_merged.bed
-   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/result_10kb
+   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/fountains_10kb
    ```
 # Output
 ### Result Files:
