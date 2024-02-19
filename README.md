@@ -21,7 +21,6 @@
   ```
   Python(3.8+) packages: numpy, pandas, scipy, click, logging, numba, cooler, bioframe...
     
-  bedGraphToBigWig (from UCSC)
   ```
 
 # Usage
