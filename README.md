@@ -19,7 +19,7 @@
 # Requirements
   Please ensure that you have already installed the following packages:
   ```
-  Python(3.8+) packages: numpy, pandas, scipy, click, numba, cooler, bioframe...
+  Python(3.8+) packages: numpy, pandas, scipy, click, logging, numba, cooler, bioframe...
     
   bedGraphToBigWig (from UCSC)
   ```
