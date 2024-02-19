@@ -1,10 +1,16 @@
 import os
 import cooler
 import click
+import logging
+
 import numpy as np
 import pandas as pd
+
 from cli import cli
 from lib.find_peaks import find_peak_prominence
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @cli.command()
 @click.argument(
@@ -13,76 +19,114 @@ from lib.find_peaks import find_peak_prominence
 )
 @click.option(
     "--track",
-    help = "Path of SoN tracks for all chroms",
+    help = "The absolute path of SoN tracks for all chroms",
     type = str
 )
 @click.option(
     "--out_dir",
-    help = "The absolute path with prefix of output result",
+    help = "The absolute path for output directory",
     type = str
 )
 
 def generate_summits(cool_path, track, out_dir):
+    """
+    Find summits based on SoN
 
+    """
+
+    # load cooler and SoN track
+    logger.info('Starting Summits detection...')
     clr = cooler.Cooler(cool_path)
-    track = pd.read_table(
-        track, header=None, sep = '\t'
-    )
+    track_data = _load_track_data(track)
 
-    track.columns = ['chrom', 'start', 'end', 'values']
-
+    # suffix
     resolution = clr.binsize
-    suffix = '_' + str(resolution // 1000) + 'kb.bed'
+    suffix = f'_{resolution // 1000}kb.bed'
 
-    out_dir = out_dir + 'SoN_summits/'
-    os.system('mkdir %s' % out_dir)
+    out_dir = os.path.join(out_dir, 'SoN_summits/')
+    os.makedirs(out_dir, exist_ok=True)
 
     for chrom in clr.chromnames:
-        chrom = 'chr' + chrom
+        logger.info(f'Processing chromosome {chrom}...')
+        _process_chromosome_data('chr' + chrom, track_data, out_dir, suffix)
 
-        # get SoN signal tracks for targeted chromosome
-        signal_filter = track[track['chrom'] == chrom]
-        signal_filter_value = signal_filter['values'].values
+    _merge_summits(out_dir, resolution)
 
-        # To find summits, we ignore the negative SoN values
-        signal_filter_value[signal_filter_value < 0] = 0
-        signal_filter['values'] = signal_filter_value
 
-        # get positions of summits
-        poss, proms = find_peak_prominence(signal_filter['values'].values)
+def _load_track_data(track_path):
+    """
+    Load track data from the given path.
 
-        chr_cord_start = [i * resolution for i in poss]
-        chr_cord_end = [(i + 1) * resolution for i in poss]
-        names = np.repeat('.', len(poss))
-        strands = np.repeat('.', len(poss))
-
-        # get SoN score
-        SoN_values = signal_filter['values'].values[poss]
-
-        data_dict = {
-            'chr': np.repeat(chrom, len(poss)),
-            'start': chr_cord_start,
-            'end': chr_cord_end,
-            'name': names,
-            'SoN': SoN_values,
-            'strand': strands
-        }
-
-        output = chrom + suffix
-        df = pd.DataFrame(data_dict)
-        df.to_csv(
-            out_dir + output,
-            sep='\t',
-            header=None,
-            index=None
-        )
-
-    # merge all summits into one file
-    os.system(
-        'cat %s*.bed > %sSummits_%s_merged.bed' % (out_dir, out_dir, resolution)
+    """
+    track_data = pd.read_table(
+        track_path, header=None, sep='\t', names = ['chrom', 'start', 'end', 'SoN']
     )
 
-    # remove summits for individual chromosome
-    os.system(
-        'rm %schr*' % out_dir
+    return track_data
+
+
+def _process_chromosome_data(chrom, track, out_dir, suffix):
+    """
+    Process track data for a specific chromosome and write summits to file.
+
+    """
+
+    SoN_df = track[track.loc[:, 'chrom'] == chrom].copy()
+    SoN_df.loc[:, 'SoN'] = SoN_df.loc[:, 'SoN'].clip(lower=0)
+
+    # Get positions of summits
+    poss, _ = find_peak_prominence(SoN_df.loc[:, 'SoN'].values)
+
+    chr_cord_start = SoN_df.loc[:, 'start'].values[poss]
+    chr_cord_end = SoN_df.loc[:, 'end'].values[poss]
+    names = np.repeat('.', len(poss))
+    strands = np.repeat('.', len(poss))
+
+    # Get SoN scores
+    SoN_values = SoN_df.loc[:, 'SoN'].values[poss]
+
+    data_dict = {
+        'chr': np.repeat(chrom, len(poss)),
+        'start': chr_cord_start,
+        'end': chr_cord_end,
+        'name': names,
+        'SoN': SoN_values,
+        'strand': strands
+    }
+
+    df = pd.DataFrame(data_dict)
+    df.to_csv(
+        os.path.join(out_dir, chrom + suffix),
+        sep='\t', header=True, index=None
     )
+
+def _merge_summits(out_dir, resolution):
+    """
+    Merge individual summit files into one.
+
+    """
+    merged_file_name = f'Summits_{resolution}_merged.bed'
+    merged_file_path = os.path.join(out_dir, merged_file_name)
+
+    files = [f for f in os.listdir(out_dir) if f.endswith('.bed')]
+    first = True
+
+    if not os.path.exists(merged_file_path):
+        with open(merged_file_path, 'w') as wfd:
+            for f in files:
+                file_path = os.path.join(out_dir, f)
+
+                with open(file_path, 'r') as fd:
+                    if first:
+                        columns = next(fd)
+                        wfd.write(columns)
+                        first = False
+                    else:
+                        next(fd)
+
+                    for line in fd:
+                        wfd.write(line)
+
+    else:
+        logger.info('merged summits already exist, skip...')
+
