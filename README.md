@@ -98,4 +98,4 @@ Before identifying the fountains, please remove the summits that fall into low-q
 ![image](https://github.com/zzdzr/Fun/blob/master/image/Fountains.png)
   
 # Version
-  - Fun v1.0.0
+  - Fun v1.0.1
