@@ -61,7 +61,7 @@ Before identifying the fountains, please remove the summits that fall into low-q
 # Output
 ### Result Files:
 
-  - ***_1.3.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
+  - ***_.tab**: This file contains identified fountains after quality control. In current version, it contains 14 columns:
 
 
     
@@ -83,7 +83,7 @@ Before identifying the fountains, please remove the summits that fall into low-q
 
 <br>
 
-  - ***_1.3.bedpe**: This file is converted based on the results of the .tab file
+  - ***_.bedpe**: This file is converted based on the results of the .tab file
 
 
 | chr1 | x1 | x2 | chr2 | y1 | y2 |
