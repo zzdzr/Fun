@@ -21,6 +21,7 @@
   Please ensure that you have already installed the following packages:
   ```
   Python(3.8+) packages: numpy, pandas, scipy, click, logging, numba, cooler, bioframe
+  The main dependency versions are as follows:
     numba: 0.56.2
     pandas: 1.4.1
     numpy: 1.23.3
