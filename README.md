@@ -20,8 +20,14 @@
 # Requirements
   Please ensure that you have already installed the following packages:
   ```
-  Python(3.8+) packages: numpy, pandas, scipy, click, logging, numba, cooler, bioframe...
-    
+  Python(3.8+) packages: numpy, pandas, scipy, click, logging, numba, cooler, bioframe
+    numba: 0.56.2
+    pandas: 1.4.1
+    numpy: 1.23.3
+    bioframe: 0.3.3
+    scipy: 1.9.1
+    cooler: 0.8.11
+    click: 7.1.2
   ```
 
 # Usage
