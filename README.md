@@ -21,7 +21,6 @@
   Please ensure that you have already installed the following packages:
   ```
   Python(3.8+) packages: numpy(1.23.3), pandas(1.4.1), scipy(1.9.1), click(7.1.2), logging, numba(0.56.2), cooler(0.8.11), bioframe(0.3.3)
-
   ```
 
 # Usage
