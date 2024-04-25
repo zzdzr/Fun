@@ -55,7 +55,7 @@ In current version, we attempt to find summits based on an algorithm from coolto
 Before identifying the fountains, please remove the summits that fall into low-quality genomic regions. In this module, you can perform algorithm within a Hi-C matrix of given normalization method and resolution. You can specify the **width of the sampling box, the length of the offset**, and also set the **step size for the sliding layer (--extension_pixels)**, **threshold for the p-value** (--p_value) and **fold change** (--signal_noise_background). (Header of summits.bed should be removed before identifying fountains). 
    ```
    Fun find-fountains input.mcool::resolutions/10000 --ext_length 500000 --half_width 2 --norm VC_SQRT --region_path Summits_10000_merged.bed
-   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.3 --output /output_dir/fountains_10kb
+   --extension_pixels 10 100 5 --offset 50000 --interval_length 50000 --coverage_ratio 0 --p_value 0.05 --signal_noise_background 1.1 1.2 1.3 1.4 1.5 --output /output_dir/fountains_10kb
    ```
 # Output
 ### Result Files:
